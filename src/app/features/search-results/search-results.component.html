@@ -1,0 +1,167 @@
+<div class="container-fluid py-4">
+  <div class="row">
+    <!-- Sidebar Filters -->
+    <aside class="col-md-3 mb-4 mb-md-0">
+      <div class="bg-light rounded-4 shadow-sm p-3 h-100">
+        <h6 class="fw-bold mb-3">Search Filters</h6>
+        <ul class="list-group list-group-flush small mb-3" *ngIf="results.length">
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+              [ngClass]="{'active': activeCategory === 'movie', 'filter-li': true}"
+              (click)="setCategory('movie')" *ngIf="groupedResults.movie?.length">
+            🎬 Movies <span class="badge bg-primary">{{ groupedResults.movie.length }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+              [ngClass]="{'active': activeCategory === 'tv', 'filter-li': true}"
+              (click)="setCategory('tv')" *ngIf="groupedResults.tv?.length">
+            📺 TV Shows <span class="badge bg-success">{{ groupedResults.tv.length }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+              [ngClass]="{'active': activeCategory === 'person', 'filter-li': true}"
+              (click)="setCategory('person')" *ngIf="groupedResults.person?.length">
+            🧑 People <span class="badge bg-warning text-dark">{{ groupedResults.person.length }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+              [ngClass]="{'active': activeCategory === 'collection', 'filter-li': true}"
+              (click)="setCategory('collection')" *ngIf="groupedResults.collection?.length">
+            📚 Collections <span class="badge bg-info text-dark">{{ groupedResults.collection.length }}</span>
+          </li>
+        </ul>
+        <div *ngIf="selectedMood" class="mt-2 small">
+          Showing results for category: <strong class="text-primary text-capitalize">{{ selectedMood.replace('-', ' ') }}</strong>
+        </div>
+        <p class="mt-3 small text-muted mb-0">💡 Tip: Use <code>y:YYYY</code> to filter by year.</p>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="col-md-9">
+      <!-- Mood-based Movies -->
+      <section *ngIf="movies.length">
+        <h5 class="mb-3 text-capitalize fw-semibold">{{ selectedMood.replace('-', ' ') }} Movies</h5>
+        <div class="row g-4">
+          <div class="col-6 col-md-4 col-lg-3" *ngFor="let movie of movies; let i = index">
+            <div class="card bg-dark text-white border-0 rounded-4 shadow-sm h-100">
+              <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : fallbackImage"
+                   class="card-img-top rounded-4" [alt]="movie.title || 'Movie Poster'">
+              <div class="card-img-overlay d-flex flex-column justify-content-end p-2 info-overlay">
+                <h6 class="card-title text-white mb-1 text-truncate">{{ movie.title }}</h6>
+                <small class="text-white-50">{{ movie.release_date | date:'yyyy' }} • ⭐ {{ movie.vote_average }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Movies Results -->
+      <section *ngIf="groupedResults.movie?.length && (activeCategory === 'movie' || activeCategory === 'all')">
+        <h5 class="text-info mt-4 mb-3">🎬 Movies</h5>
+        <div class="row g-4">
+          <!-- <div class="col-12 col-md-6" *ngFor="let movie of groupedResults.movie">
+            <div class="card bg-dark text-white border-0 rounded-4 shadow-sm h-100 flex-row">
+              <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w300' + movie.poster_path : fallbackImage"
+                   class="img-fluid rounded-start" style="width:120px;object-fit:cover;" [alt]="movie.title || 'Movie Poster'">
+              <div class="card-body">
+                <h5 class="card-title mb-1">{{ movie.title }}</h5>
+                <small class="text-muted">{{ movie.release_date | date }}  • ⭐ {{ movie.vote_average }}</small>
+                <p class="card-text small mt-2 text-light">{{ movie.overview || 'No description available.' }}</p>
+              </div>
+            </div>
+          </div> -->
+
+            <div class="col-6 col-md-4 col-lg-3" *ngFor="let movie of groupedResults.movie; let i = index">
+            <div class="card bg-dark text-white border-0 rounded-4 shadow-sm h-100">
+              <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : fallbackImage"
+                   class="card-img-top rounded-4" [alt]="movie.title || 'Movie Poster'">
+              <div class="card-img-overlay d-flex flex-column justify-content-end p-2 info-overlay">
+                <h6 class="card-title text-white mb-1 text-truncate">{{ movie.title }}</h6>
+                <small class="text-white-50">{{ movie.release_date | date:'yyyy' }} • ⭐ {{ movie.vote_average }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TV Shows Results -->
+      <section *ngIf="groupedResults.tv?.length && (activeCategory === 'tv' || activeCategory === 'all')">
+        <h5 class="text-success mt-4 mb-3">📺 TV Shows</h5>
+        <div class="row g-4">
+          <!-- <div class="col-12 col-md-6" *ngFor="let tv of groupedResults.tv">
+            <div class="card bg-dark text-white border-0 rounded-4 shadow-sm h-100 flex-row">
+              <img [src]="tv.poster_path ? 'https://image.tmdb.org/t/p/w300' + tv.poster_path : fallbackImage"
+                   class="img-fluid rounded-start" style="width:120px;object-fit:cover;" [alt]="tv.name || 'TV Poster'">
+              <div class="card-body">
+                <h6 class="card-title">{{ tv.name }}</h6>
+                <small class="text-muted">{{ tv.first_air_date | date }}</small>
+                <p class="card-text small mt-2 text-light">{{ tv.overview || 'No description available.' }}</p>
+              </div>
+            </div>
+          </div> -->
+
+
+            <div class="col-6 col-md-4 col-lg-3" *ngFor="let movie of groupedResults.tv; let i = index">
+            <div class="card bg-dark text-white border-0 rounded-4 shadow-sm h-100">
+              <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : fallbackImage"
+                   class="card-img-top rounded-4" [alt]="movie.title || 'Movie Poster'">
+              <div class="card-img-overlay d-flex flex-column justify-content-end p-2 info-overlay">
+                <h6 class="card-title text-white mb-1 text-truncate">{{ movie.name }}</h6>
+                <small class="text-white-50">{{ movie.first_air_date | date:'yyyy' }} • ⭐ {{ movie.vote_average }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- People Results -->
+      <section *ngIf="groupedResults.person?.length && (activeCategory === 'person' || activeCategory === 'all')">
+        <h5 class="text-warning mt-4 mb-3">🧑 People</h5>
+        <div class="row g-4">
+          <div class="col-6 col-md-4 col-lg-3" *ngFor="let person of groupedResults.person">
+            <div class="card text-center bg-black text-white border-0 rounded-4 shadow-sm h-100">
+              <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/w300' + person.profile_path : fallbackImage"
+                   class="rounded-circle mx-auto mt-3" style="width: 80px; height: 80px; object-fit:cover;" [alt]="person.name || 'Person'">
+              <div class="card-body p-2">
+                <h6 class="card-title small mb-1 text-truncate">{{ person.name }}</h6>
+                <p class="text-muted small mb-0">{{ person.known_for_department || 'Actor' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Collections Results -->
+      <section *ngIf="groupedResults.collection?.length && (activeCategory === 'collection' || activeCategory === 'all')">
+        <h5 class="text-primary mt-4 mb-3">📚 Collections</h5>
+        <div class="row g-4">
+
+           <div class="col-6 col-md-4 col-lg-3" *ngFor="let movie of groupedResults.collection; let i = index">
+            <div class="card bg-dark text-white border-0 rounded-4 shadow-sm h-100">
+              <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : fallbackImage"
+                   class="card-img-top rounded-4" [alt]="movie.title || 'Movie Poster'">
+              <div class="card-img-overlay d-flex flex-column justify-content-end p-2 info-overlay">
+                <h6 class="card-title text-white mb-1 text-truncate">{{ movie.name }}</h6>
+                <small class="text-white-50">{{ movie.first_air_date | date:'yyyy' }} • ⭐ {{ movie.vote_average }}</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-12 col-md-6" *ngFor="let col of groupedResults.collection">
+            <div class="card bg-black text-white border-0 rounded-4 shadow-sm h-100 flex-row">
+              <img [src]="col.poster_path ? 'https://image.tmdb.org/t/p/w300' + col.poster_path : fallbackImage"
+                   class="img-fluid rounded-start" style="width:120px;object-fit:cover;" [alt]="col.name || 'Collection Poster'">
+              <div class="card-body">
+                <h6 class="card-title">{{ col.name }}</h6>
+                <p class="card-text small mt-2 text-muted">{{ col.overview || 'No description available.' }}</p>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </section>
+
+      <!-- No Results -->
+      <div *ngIf="!movies.length && !groupedResults.movie?.length && !groupedResults.tv?.length && !groupedResults.person?.length && !groupedResults.collection?.length" class="text-center py-5">
+        <h5 class="text-muted">No results found.</h5>
+      </div>
+    </main>
+  </div>
+</div>
+
