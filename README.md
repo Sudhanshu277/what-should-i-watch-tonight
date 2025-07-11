@@ -57,3 +57,31 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+# What Should I Watch Tonight?
+
+A movie and TV recommendation web app built with Angular 17+ and The Movie Database (TMDB) API.
+
+> Live Demo: [https://celadon-kulfi-4f2053.netlify.app](https://celadon-kulfi-4f2053.netlify.app)
+
+---
+
+## 🚀 Features
+
+-  Multi-type TMDB search (Movies, TV, People, Collections)
+-  Mood-based filtering (Feel-good, Thriller, etc.)
+-  Trending / Popular / Top Rated movie carousels
+-  LocalStorage-based Watchlist support
+-  Movie details with trailers, cast, similar items
+-  Responsive UI with Angular standalone components
+-  Unit tests using Karma + Jasmine
+
+---
+
+## 🛠️ Development Setup
+
+### 1. Install Dependencies
+
+```bash
+npm install

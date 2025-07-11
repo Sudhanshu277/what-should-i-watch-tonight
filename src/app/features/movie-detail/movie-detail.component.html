@@ -46,7 +46,7 @@
       *ngFor="let member of movie.credits.cast.slice(0, 12)"
     >
       <img
-        [src]="member.profile_path ? 'https://image.tmdb.org/t/p/w300' + member.profile_path : 'https://via.placeholder.com/300x450?text=No+Image'"
+        [src]="member.profile_path ? 'https://image.tmdb.org/t/p/w300' + member.profile_path : 'https://www.flaticon.com/free-icon/user_7966411'"
         alt="{{ member.name }}"
         class="cast-img rounded-top"
       />
