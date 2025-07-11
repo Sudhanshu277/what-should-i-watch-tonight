@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -125,28 +125,28 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Component } from '@angular/core';
@@ -174,22 +174,22 @@ watchlistCount: number = 0;
 &nbsp;
 }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  onSearch(</span>event: Event) {
-<span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
-    const trimmed = <span class="cstat-no" title="statement not covered" >this.searchQuery.trim();</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (trimmed) {</span>
-<span class="cstat-no" title="statement not covered" >      this.router.navigate(['/search'], { queryParams: { q: trimmed } });</span>
-<span class="cstat-no" title="statement not covered" >      this.searchQuery = '';</span>
+  onSearch(event: Event) {
+    event.preventDefault();
+    const trimmed = this.searchQuery.trim();
+    if (trimmed) {
+      this.router.navigate(['/search'], { queryParams: { q: trimmed } });
+      this.searchQuery = '';
     }
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" > goToCategory(</span>mood: string) {
-<span class="cstat-no" title="statement not covered" >  this.router.navigate(['/search'], { queryParams: { category: mood } });</span>
+ goToCategory(mood: string) {
+  this.router.navigate(['/search'], { queryParams: { category: mood } });
 }
 &nbsp;
-<span class="fstat-no" title="function not covered" >updateWatchlistCount(</span>) {
-  const list = <span class="cstat-no" title="statement not covered" >JSON.parse(localStorage.getItem('watchlist') || '[]');</span>
-<span class="cstat-no" title="statement not covered" >  this.watchlistCount = list.length;</span>
+updateWatchlistCount() {
+  const list = JSON.parse(localStorage.getItem('watchlist') || <span class="branch-1 cbranch-no" title="branch not covered" >'[]')</span>;
+  this.watchlistCount = list.length;
 }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -199,7 +199,7 @@ watchlistCount: number = 0;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-11T10:01:23.506Z
+                at 2025-07-11T15:08:01.189Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

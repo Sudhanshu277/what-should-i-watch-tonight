@@ -68,12 +68,13 @@ loadTopRated() {
   }
 
   setFeaturedMovie(movie: any) {
+    console.log(movie)
     this.featuredMovie = movie;
-    this.posterUrl = 'https://image.tmdb.org/t/p/original' + movie.backdrop_path;
+    this.posterUrl = 'https://image.tmdb.org/t/p/original' + this.featuredMovie?.backdrop_path;
 
-    this.posterUrl = movie.backdrop_path
-  ? 'https://image.tmdb.org/t/p/original' + movie.backdrop_path
-  : 'https://lh6.googleusercontent.com/proxy/gzG8eECQ-37TFxxR6Nwwcpr4ZeJwnrwglpTlGRs-ZkUponMNr24cSbN_th0Q5mXXmVyh-UCnupb2P7PUApVfyFSK0p6bkg3ZANBBdBzD3oqH2Cb_IRJSNKC6mwE';
+    this.posterUrl = this.featuredMovie?.backdrop_path
+  ? 'https://image.tmdb.org/t/p/original' + this.featuredMovie?.backdrop_path
+  : '/poster.jpg';
 
     if (this.posterTimeout) {
       clearTimeout(this.posterTimeout);

@@ -49,7 +49,7 @@ describe('SearchResultsComponent', () => {
   it('should fetch and group search results on init when query param is present', fakeAsync(() => {
     tmdbServiceSpy.searchMulti.and.returnValue(of(mockResults));
     component.ngOnInit();
-    tick(); // simulate async
+    tick();
     fixture.detectChanges();
 
     expect(tmdbServiceSpy.searchMulti).toHaveBeenCalledWith('batman');
@@ -62,17 +62,21 @@ describe('SearchResultsComponent', () => {
 
 it('should fetch mood-based movies when category param is present', fakeAsync(() => {
 
-  tmdbServiceSpy.getMoviesByMood.and.returnValue(of({ results: [{ id: 99, title: 'Feel Good Movie' }] }));
+  const moodResponse = { results: [{ id: 35, title: 'Feel Good Movie' }] };
+  const tmdbSpy = jasmine.createSpyObj('TmdbService', ['searchMulti', 'getMoviesByMood']);
+  const watchlistSpy = jasmine.createSpyObj('WatchlistService', ['toggleMovie', 'isInWatchlist']);
+  const routerMock = jasmine.createSpyObj('Router', ['navigate']);
 
+  tmdbSpy.getMoviesByMood.and.returnValue(of(moodResponse));
 
   TestBed.resetTestingModule();
   TestBed.configureTestingModule({
     imports: [SearchResultsComponent],
     providers: [
-      { provide: TmdbService, useValue: tmdbServiceSpy },
-      { provide: WatchlistService, useValue: watchlistServiceSpy },
+      { provide: TmdbService, useValue: tmdbSpy },
+      { provide: WatchlistService, useValue: watchlistSpy },
       { provide: ActivatedRoute, useValue: { queryParams: of({ category: 'happy' }) } },
-      { provide: Router, useValue: routerSpy }
+      { provide: Router, useValue: routerMock }
     ],
     schemas: [NO_ERRORS_SCHEMA]
   }).compileComponents();
@@ -81,13 +85,15 @@ it('should fetch mood-based movies when category param is present', fakeAsync(()
   component = fixture.componentInstance;
 
   component.ngOnInit();
-  tick();
+  tick(); // wait for observable to resolve
   fixture.detectChanges();
 
-  expect(tmdbServiceSpy.getMoviesByMood).toHaveBeenCalledWith('happy');
-  expect(component.results.length).toBeGreaterThan(0);
-  expect(component.results[0].title).toBe('Feel Good Movie');
+  expect(tmdbSpy.getMoviesByMood).toHaveBeenCalledWith('happy');
+expect(component.movies.length).toBeGreaterThan(0);
+expect(component.movies[0].title).toBe('Feel Good Movie');
+
 }));
+
 
 
   it('should navigate to movie detail page', () => {
