@@ -43,7 +43,7 @@
 
 
             <ng-container *ngFor="let movie of movies; let i = index">
-              <div class="col-6 col-md-4 col-lg-3">
+              <div class=" col-md-4 col-lg-3">
                  <div
   class="position-relative trending-card card bg-black text-white border-0 rounded-4"
   style="min-width: 200px; cursor: pointer;"
@@ -87,7 +87,7 @@
 
       <!-- Movies Results -->
       <section *ngIf="groupedResults.movie?.length && (activeCategory === 'movie' || activeCategory === 'all')">
-        <h5 class="text-info mt-4 mb-3">🎬 Movies</h5>
+        <h5 class="text-info mt-4 mb-3">🎬 Moviess</h5>
         <div class="row g-4">
 
 
@@ -95,7 +95,7 @@
 
 
                <ng-container *ngFor="let movie of groupedResults.movie; let i = index">
-              <div class="col-6 col-md-4 col-lg-3" *ngIf="movie?.poster_path">
+              <div class=" col-md-4 col-lg-3" *ngIf="movie?.poster_path">
                  <div
   class="position-relative trending-card card bg-black text-white border-0 rounded-4"
   style="min-width: 200px; cursor: pointer;"
@@ -143,7 +143,7 @@
         <div class="row g-4">
 
    <ng-container *ngFor="let movie of groupedResults.tv; let i = index">
-              <div class="col-6 col-md-4 col-lg-3" *ngIf="movie">
+              <div class=" col-md-4 col-lg-3" *ngIf="movie">
                  <div
   class="position-relative trending-card card bg-black text-white border-0 rounded-4"
   style="min-width: 200px; cursor: pointer;"
@@ -183,7 +183,7 @@
 
     </ng-container>
 
-            <!-- <div class="col-6 col-md-4 col-lg-3" *ngFor="let movie of groupedResults.tv; let i = index">
+            <!-- <div class=" col-md-4 col-lg-3" *ngFor="let movie of groupedResults.tv; let i = index">
             <div class="card bg-dark text-white border-0 rounded-4 shadow-sm overflow-hidden h-100"  style="min-width: 200px; cursor: pointer;" (click)="goToDetails(movie.id)">
               <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : fallbackImage"
                    class="card-img-top rounded-4" [alt]="movie.title || 'Movie Poster'">
@@ -200,9 +200,9 @@
       <section *ngIf="groupedResults.person?.length && (activeCategory === 'person' || activeCategory === 'all')">
         <h5 class="text-warning mt-4 mb-3">🧑 People</h5>
         <div class="row g-4">
-          <div class="col-6 col-md-4 col-lg-3" *ngFor="let person of groupedResults.person">
+          <div class=" col-md-4 col-lg-3" *ngFor="let person of groupedResults.person">
             <div class="card text-center bg-black text-white border-0 rounded-4 shadow-sm h-100">
-              <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/w300' + person.profile_path : fallbackImage"
+              <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/w300' + person.profile_path : '/user.png'"
                    class="rounded-circle mx-auto mt-3" style="width: 80px; height: 80px; object-fit:cover;" [alt]="person.name || 'Person'">
               <div class="card-body p-2">
                 <h6 class="card-title small mb-1 text-truncate">{{ person.name }}</h6>
@@ -218,7 +218,7 @@
         <h5 class="text-primary mt-4 mb-3">📚 Collections</h5>
         <div class="row g-4">
 
-           <!-- <div class="col-6 col-md-4 col-lg-3" *ngFor="let movie of groupedResults.collection; let i = index">
+           <!-- <div class=" col-md-4 col-lg-3" *ngFor="let movie of groupedResults.collection; let i = index">
             <div class="card bg-dark text-white border-0 rounded-4 shadow-sm overflow-hidden h-100"  style="min-width: 200px; cursor: pointer;" (click)="goToDetails(movie.id)">
               <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : fallbackImage"
                    class="card-img-top rounded-4" [alt]="movie.title || 'Movie Poster'">
@@ -230,7 +230,7 @@
           </div> -->
 
             <ng-container *ngFor="let movie of groupedResults.collection; let i = index">
-              <div class="col-6 col-md-4 col-lg-3" *ngIf="movie">
+              <div class=" col-md-4 col-lg-3" *ngIf="movie">
                  <div
   class="position-relative trending-card card bg-black text-white border-0 rounded-4"
   style="min-width: 200px; cursor: pointer;"
