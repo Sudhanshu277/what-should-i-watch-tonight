@@ -1,1 +1,140 @@
-<p>movie-detail works!</p>
+<!-- Hero Banner -->
+ <div class="bg-dark">
+<div class="movie-banner-container position-relative text-white">
+  <div class="movie-banner-bg" [ngStyle]="{ 'background-image': 'url(https://image.tmdb.org/t/p/original' + movie?.backdrop_path + ')' }"></div>
+
+  <div class="movie-banner-overlay d-flex flex-column justify-content-end px-4 px-md-5 pb-5">
+    <div class="col-lg-8">
+      <h1 class="fw-bold display-4">{{ movie?.title }}</h1>
+      <p class="text-light mb-2 fs-6">
+        {{ movie?.vote_count | number }} Votes • {{ movie?.release_date | date:'yyyy' }} • {{ movie?.runtime }} min • {{ movie?.original_language | uppercase }}
+      </p>
+      <p class=" text-light small ">{{ movie?.overview }}</p>
+
+      <div class="mb-3 d-flex flex-wrap gap-2">
+        <span class="badge bg-light text-dark" *ngFor="let genre of movie.genres">{{ genre.name }}</span>
+      </div>
+
+     <div class="d-flex gap-3 mt-4 flex-wrap">
+
+  <button *ngIf="trailerUrl"
+    class="btn btn-lg px-4 py-2 rounded-pill text-white trailler-btn"
+    (click)="playTrailer()">
+    🎬 Watch Trailer
+  </button>
+
+  <button class="btn btn-lg px-4 py-2 rounded-pill"
+    [ngClass]="isInWatchlist(movie.id) ? 'btn-outline-danger' : 'btn-outline-light'"
+    style="min-width: 200px;"
+    (click)="toggleWatchlist(movie)">
+    <span *ngIf="isInWatchlist(movie.id)">💔 Remove from Watchlist</span>
+    <span *ngIf="!isInWatchlist(movie.id)">🤍 Add to Watchlist</span>
+  </button>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Cast -->
+<div class="container  py-5 text-white" *ngIf="movie.credits?.cast?.length">
+  <h3 class="mb-4 fw-semibold ">Top Cast</h3>
+
+  <div class="d-flex overflow-auto gap-4 hide-scrollbar">
+    <div
+      class="cast-card bg-dark rounded-3 shadow-sm flex-shrink-0 text-center"
+      *ngFor="let member of movie.credits.cast.slice(0, 12)"
+    >
+      <img
+        [src]="member.profile_path ? 'https://image.tmdb.org/t/p/w300' + member.profile_path : 'https://via.placeholder.com/300x450?text=No+Image'"
+        alt="{{ member.name }}"
+        class="cast-img rounded-top"
+      />
+      <div class="p-3">
+        <h6 class="mb-1 text-white fw-semibold text-truncate" title="{{ member.name }}">
+          {{ member.name }}
+        </h6>
+        <small class=" d-block text-truncate" title="{{ member.character }}">
+          as {{ member.character }}
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  Trailer -->
+<div class="container pb-5 text-white" *ngIf="trailerUrl">
+  <h3 class="mb-4 fw-semibold ">Official Trailer</h3>
+  <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
+    <iframe [src]="trailerUrl" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Reviews -->
+<div class="container pb-5 text-white" *ngIf="movie.reviews?.results?.length">
+  <h3 class="mb-4 fw-semibold ">Reviews</h3>
+  <div class="row g-4">
+    <div class="col-md-6" *ngFor="let review of movie.reviews.results.slice(0, 4)">
+      <div class="bg-dark p-4 rounded-4 shadow-sm h-100">
+        <h6 class="mb-1 text-warning">{{ review.author }}</h6>
+        <small class="text-muted">{{ review.created_at | date: 'mediumDate' }}</small>
+        <p class="mt-2 mb-0 text-light-emphasis" style="font-size: 0.95rem;">
+          {{ review.content | slice:0:300 }}<span *ngIf="review.content.length > 300">...</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fallback -->
+<div *ngIf="!movie.reviews?.results?.length" class="text-center text-muted pb-5">
+  <p>No reviews available for this movie yet.</p>
+</div>
+
+
+<!-- Similar Movies -->
+<div class="container pb-5 text-white" *ngIf="movie.similar?.results?.length">
+  <h3 class="mb-4 fw-semibold "> Similar Movies</h3>
+
+  <div class="d-flex overflow-x-scroll hide-scrollbar gap-4 p-4">
+      <ng-container *ngFor="let movie of movie.similar.results.slice(0, 12); let i = index">
+   <div
+  class="position-relative trending-card card bg-black text-white border-0 rounded-4"
+  style="min-width: 200px; cursor: pointer;"
+  (click)="goToDetails(movie.id)"
+>
+
+  <div class="position-absolute top-0 end-0 p-2 z-3">
+    <button
+      class="btn btn-sm bg-transparent border-0 shadow-none"
+      (click)="toggleWatchlist(movie); $event.stopPropagation()"
+      title="Toggle Watchlist"
+    >
+      <span style="font-size: 1.3rem;">
+        {{ isInWatchlist(movie.id) ? '❤️' : '🤍' }}
+      </span>
+    </button>
+  </div>
+
+
+  <img
+    [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path"
+    class="card-img-top rounded-4"
+    alt="{{ movie.title }}"
+  />
+
+
+  <div class="position-absolute top-0 start-0 badge-index">{{ i + 1 }}</div>
+
+
+  <div class="card-img-overlay d-flex flex-column justify-content-end p-2 info-overlay">
+    <h6 class="card-title text-white mb-1 text-truncate">{{ movie.title }}</h6>
+    <small class="text-white-50">{{ movie.release_date | date: 'yyyy' }} • ⭐ {{ movie.vote_average }}</small>
+  </div>
+</div>
+
+    </ng-container>
+  </div>
+</div>
+ </div>
+

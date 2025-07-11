@@ -1,27 +1,5 @@
-<!-- <app-home></app-home> -->
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-  <a class="navbar-brand me-auto ms-3 fw-bold" routerLink="/">🎬 OTT</a>
-  <form class="d-flex  search-bar" (submit)="onSearch($event)">
-    <input [(ngModel)]="searchQuery" name="globalSearch" class="form-control me-2" type="search" placeholder="Search movies or actors..." aria-label="Search">
-    <button class="btn btn-outline-light" type="submit">
-      <i class="bi bi-search"></i>
-    </button>
 
-
-  </form>
-
-    <div class="dropdown">
-          <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">☰</button>
-         <ul class="dropdown-menu dropdown-menu-end">
-  <li><a class="dropdown-item" (click)="goToCategory('feel-good')">Feel Good</a></li>
-  <li><a class="dropdown-item" (click)="goToCategory('action-fix')">Action Fix</a></li>
-  <li><a class="dropdown-item" (click)="goToCategory('mind-benders')">Mind Benders</a></li>
-  <li><a class="dropdown-item" (click)="goToCategory('romantic')">Romantic</a></li>
-  <li><a class="dropdown-item" (click)="goToCategory('thriller')">Thriller</a></li>
-  <li><a class="dropdown-item" (click)="goToCategory('animation')">Animation</a></li>
-</ul>
-
-        </div>
-</nav>
-
+<app-header></app-header>
 <router-outlet></router-outlet>
+<app-footer></app-footer>
+

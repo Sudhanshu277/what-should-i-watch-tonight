@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { WatchlistService } from '../../core/service/watchlist.service';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,8 @@ topRatedMovies: any[] = [];
   constructor(
     private tmdbService: TmdbService,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+     public watchlistService: WatchlistService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +70,11 @@ loadTopRated() {
   setFeaturedMovie(movie: any) {
     this.featuredMovie = movie;
     this.posterUrl = 'https://image.tmdb.org/t/p/original' + movie.backdrop_path;
+
+    this.posterUrl = movie.backdrop_path
+  ? 'https://image.tmdb.org/t/p/original' + movie.backdrop_path
+  : 'https://lh6.googleusercontent.com/proxy/gzG8eECQ-37TFxxR6Nwwcpr4ZeJwnrwglpTlGRs-ZkUponMNr24cSbN_th0Q5mXXmVyh-UCnupb2P7PUApVfyFSK0p6bkg3ZANBBdBzD3oqH2Cb_IRJSNKC6mwE';
+
     if (this.posterTimeout) {
       clearTimeout(this.posterTimeout);
     }
@@ -148,4 +155,15 @@ isPerson(item: any): boolean {
   goToDetails(id: number) {
     this.router.navigate(['/movie', id]);
   }
+
+
+
+toggleWatchlist(movie: any) {
+  this.watchlistService.toggleMovie(movie);
+}
+
+isInWatchlist(id: number): boolean {
+  return this.watchlistService.isInWatchlist(id);
+}
+
 }

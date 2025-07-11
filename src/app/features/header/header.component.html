@@ -1,0 +1,53 @@
+
+<nav class="navbar navbar-expand-lg bg-black navbar-dark py-3 shadow-sm">
+  <div class="container-fluid">
+
+    <a class="navbar-brand fw-bold fs-3 text-gradient" routerLink="/">🎬  What Should I Watch Tonight</a>
+
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <!-- Search -->
+      <form class="d-flex ms-auto my-2 my-lg-0 me-2 search-bar" (submit)="onSearch($event)">
+        <input [(ngModel)]="searchQuery" name="globalSearch"
+               class="form-control me-2 rounded-pill bg-dark text-white border-secondary"
+               type="search" placeholder="Search movies or actors..." aria-label="Search" />
+        <!-- <button class="btn btn-outline-light rounded-pill px-3" type="submit">
+          <i class="bi bi-search"></i>
+        </button> -->
+      </form>
+
+
+      <div class="dropdown me-2">
+        <button class="btn btn-outline-light dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown">
+          🎭 Moods
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item" (click)="goToCategory('feel-good')">😊 Feel Good</a></li>
+          <li><a class="dropdown-item" (click)="goToCategory('action-fix')">💥 Action Fix</a></li>
+          <li><a class="dropdown-item" (click)="goToCategory('mind-benders')">🧠 Mind Benders</a></li>
+          <li><a class="dropdown-item" (click)="goToCategory('romantic')">❤️ Romantic</a></li>
+          <li><a class="dropdown-item" (click)="goToCategory('thriller')">😱 Thriller</a></li>
+          <li><a class="dropdown-item" (click)="goToCategory('animation')">🎨 Animation</a></li>
+        </ul>
+      </div>
+
+
+
+      <a routerLink="/watchlist" class="btn btn-outline-warning rounded-pill position-relative me-2">
+  <i class="bi bi-bookmarks"></i> My Watchlist
+  <span
+    *ngIf="watchlistCount > 0"
+    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    style="font-size: 0.7rem;">
+    {{ watchlistCount }}
+  </span>
+</a>
+
+    </div>
+  </div>
+</nav>
