@@ -1,7 +1,8 @@
 # Angular specific
+# /dist/
 /out-tsc/
 /tmp/
-/coverage/
+# /coverage/
 /e2e/test-output/
 /.angular/
 .angular/
