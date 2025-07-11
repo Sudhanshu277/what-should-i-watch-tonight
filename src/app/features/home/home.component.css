@@ -7,7 +7,9 @@
   pointer-events: none;
 }
 
-
+.trailler-btn{
+  background: linear-gradient(90deg, #ff416c, #ff4b2b); border: none; box-shadow: 0 4px 10px rgba(255, 65, 108, 0.4);
+}
 
 
 /* Hero section text styles */

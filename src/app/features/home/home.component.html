@@ -26,8 +26,12 @@
     {{ featuredMovie?.original_language?.toUpperCase() }}
   </p>
   <p class="small">{{ featuredMovie?.overview }}</p>
-  <button (click)="goToDetails(featuredMovie?.id)" class="btn btn-primary me-2">▶ Watch Now</button>
 
+ <button *ngIf="trailerUrl"
+    class="btn btn-lg px-4 py-2 rounded-pill text-white trailler-btn"
+    (click)="goToDetails(featuredMovie?.id)">
+    🎬 Watch Now
+  </button>
 </div>
 
   </div>
