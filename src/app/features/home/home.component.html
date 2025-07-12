@@ -1,10 +1,10 @@
 
 
-<div class="position-relative  hero-gradient" style="height: 70vh; overflow: hidden;">
+<div class="position-relative  hero-gradient hero-height" >
 
 
    <div class="w-100 h-100 position-absolute top-0 start-0 overflow-hidden" style="z-index: 0;">
-   <div class="ratio ratio-16x9 position-absolute" style="filter: blur(1px); overflow: hidden;">
+   <div class="ratio ratio-16x9 position-absolute hero-banner-blur" >
     <ng-container *ngIf="trailerUrl; else poster">
       <iframe [src]="trailerUrl" allowfullscreen #trailerPlayer id="trailerPlayer" muted autoplay (ended)="playNextTrailer()"></iframe>
     </ng-container>
@@ -43,8 +43,8 @@
 
         <ng-container *ngFor="let movie of trendingMovies; let i = index">
    <div
-  class="position-relative trending-card card bg-black text-white border-0 rounded-4"
-  style="min-width: 200px; cursor: pointer;"
+  class="position-relative trending-card min-width-card card bg-black text-white border-0 rounded-4"
+
   (click)="goToDetails(movie.id)"
 >
 
@@ -85,8 +85,8 @@
   <div class="d-flex overflow-x-scroll hide-scrollbar gap-4 p-4">
     <ng-container *ngFor="let movie of popularMovies; let i = index">
    <div
-  class="position-relative trending-card card bg-black text-white border-0 rounded-4"
-  style="min-width: 200px; cursor: pointer;"
+  class="position-relative min-width-card trending-card card bg-black text-white border-0 rounded-4"
+
   (click)="goToDetails(movie.id)"
 >
 
@@ -128,8 +128,8 @@
 
       <ng-container *ngFor="let movie of topRatedMovies; let i = index">
    <div
-  class="position-relative trending-card card bg-black text-white border-0 rounded-4"
-  style="min-width: 200px; cursor: pointer;"
+  class="position-relative trending-card min-width-card card bg-black text-white border-0 rounded-4"
+
   (click)="goToDetails(movie.id)"
 >
 

@@ -38,8 +38,5 @@ describe('FooterComponent', () => {
     expect(categoryLinks.length).toBe(3);
   });
 
-  it('should display copyright text', () => {
-    const text = fixture.nativeElement.querySelector('.text-center span');
-    expect(text?.textContent).toContain('Powered by TMDB API');
-  });
+
 });

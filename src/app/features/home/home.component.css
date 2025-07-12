@@ -11,6 +11,14 @@
   background: linear-gradient(90deg, #ff416c, #ff4b2b); border: none; box-shadow: 0 4px 10px rgba(255, 65, 108, 0.4);
 }
 
+.hero-height {
+  height: 70vh;
+  overflow: hidden;
+}
+
+.hero-banner-blur{
+  filter: blur(1px); overflow: hidden;
+}
 
 /* Hero section text styles */
 .movie-overlay h2 {
@@ -47,7 +55,10 @@
   }
 }
 
-
+.min-width-card{
+ min-width: 200px;
+  cursor: pointer;
+}
 
 /* .trending-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
